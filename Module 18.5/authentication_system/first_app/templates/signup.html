@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Sign Up {% endblock title %}
+
+
+
+{% block content %}
+
+
+<!-- Header -->
+<div class="p-4 rounded my-2" style="background-color: bisque;">
+    <h1 class="text-center">This is Sign Up Page</h1>
+</div>
+<!-- Header Ends -->
+
+
+<br>
+
+<!-- Message Showing Area -->
+    {% if messages %}
+        {% for m in messages %}
+            <p class="bg-{{m.tags}} text-center p-4 mx-5 fs-4 rounded" >{{m}}</p>
+        {% endfor %}
+    {% endif %}
+<!-- Message Showing Area -->
+
+
+<!-- signup form area -->
+<div class="container w-50">
+    <h2 class="text-center">SignUp Form</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <!-- {{form | crispy}} -->
+        {% for fm in form %}
+            {{fm.label_tag}}
+            {{fm}}
+            <p>{{fm.errors | striptags}}</p>
+        {% endfor %}
+
+        <p>Already Have an Account? <a href="{% url 'login' %}" class="text-decoration-none fw-bold">Login</a></p>
+        <button class="btn btn-primary mb-5">Sign Up</button>
+
+    </form>
+</div>
+
+{% endblock content %}
+
+<!-- Signup ends here -->
